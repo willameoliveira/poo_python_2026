@@ -9,7 +9,7 @@ class Conta:
         return self.saldo
 
     def sacar(self, valor):
-        if self.saldo > valor:
+        if valor > 0 and self.saldo > valor:
             self.saldo -= valor
 
     def depositar(self, valor):
