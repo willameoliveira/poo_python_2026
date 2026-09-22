@@ -9,12 +9,22 @@ print(f"Telefone: {cliente1.telefone}")
 print(f"CPF: {cliente1.cpf}")
 
 conta1 = Conta("003456-8", 100.00, cliente1)
-print(f"Número da conta: {conta1.numero}")
+print(f"\nNúmero da conta: {conta1.numero}")
 print(f"Saldo da conta: {conta1.saldo}")
 print(f"Cliente da conta: {conta1.cliente.nome}")
 
-print(f"Saldo da conta1: {conta1.exibir_saldo()}")
 conta1.sacar(50)
-print(f"Saldo da conta1: {conta1.exibir_saldo()}")
+print(f"Saldo da conta1 depois de sacar 50: {conta1.exibir_saldo()}")
 conta1.depositar(100)
-print(f"Saldo da conta1: {conta1.exibir_saldo()}")
+print(f"Saldo da conta1 depois de depositar 100: {conta1.exibir_saldo()}")
+
+print(conta1) # imprime os dados da variável de referência
+
+conta2 = Conta("004554-7", 200.00, cliente2)
+if conta1.transferir(conta2, 50):
+    print("Transferência realizada com sucesso!")
+    print(f"Saldo conta 1: {conta1.exibir_saldo()}")
+    print(f"Saldo conta 2: {conta2.exibir_saldo()}")
+else:
+    print("Transferência falhou!")
+
