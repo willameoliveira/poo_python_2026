@@ -11,7 +11,7 @@ class Conta:
 
     # As mensagens de erro irão aparecer aqui mais tarde com uso de tratamento de exceções
     def sacar(self, valor):
-        if valor > 0 and self.saldo >= valor: #CORRIGIR saldo >= valor
+        if valor > 0 and self.saldo >= valor:
             self.saldo -= valor
             return True
         return False

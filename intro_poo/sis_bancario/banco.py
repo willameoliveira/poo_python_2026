@@ -8,7 +8,7 @@ print(f"Nome: {cliente1.nome}")
 print(f"Telefone: {cliente1.telefone}")
 print(f"CPF: {cliente1.cpf}")
 
-conta1 = Conta("003456-8", cliente1, 100)
+conta1 = Conta(numero="003456-8", cliente=cliente1, saldo=100) # usando parâmetros nomeados (recurso opcional)
 print(f"\nNúmero da conta: {conta1.numero}")
 print(f"Saldo da conta: {conta1.saldo}")
 print(f"Cliente da conta: {conta1.cliente.nome}")
