@@ -20,10 +20,6 @@ class Conta:
     @property
     def saldo(self):
         return self._saldo
-    
-    # O print fica por conta de quem chama o método. Isso torna nossa classe reusável para outros frontend (web, android, etc).
-    def exibir_saldo(self):
-        return self.saldo
 
     def _validar_saque(self, valor: float):
         if valor > 0 and self.saldo >= valor:
@@ -50,10 +46,13 @@ class Conta:
         if self._validar_saque(valor):
             self._saldo -= valor
             destino._saldo += valor
-            self._movimentacoes.append(Movimentacao(f"Transferência de R$ {valor:.2f} enviada para {destino.numero}"))
-            destino._movimentacoes.append(Movimentacao(f"Transferência de R$ {valor:.2f} recebida de {self.numero}"))
+            self._movimentacoes.append(Movimentacao(f"Transferência de R$ {valor:.2f} enviada para {destino}"))
+            destino._movimentacoes.append(Movimentacao(f"Transferência de R$ {valor:.2f} recebida de {self}"))
             return True
         return False
 
     def obter_extrato(self):
         return self._movimentacoes
+
+    def __str__(self):
+        return f"{self._numero}:{self._cliente.nome}"

@@ -14,8 +14,8 @@ conta1.transferir(conta2, 40)
 
 print("Extrato da conta1:")
 for movimentacao in conta1.obter_extrato():
-    print(movimentacao.formatar())
+    print(movimentacao)
 
 print("\nExtrato da conta2:")
 for movimentacao in conta2.obter_extrato():
-    print(movimentacao.formatar())
+    print(movimentacao)

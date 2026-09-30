@@ -6,5 +6,5 @@ class Movimentacao:
         self._descricao = descricao
         self._data = data
 
-    def formatar(self):
+    def __str__(self):
         return f"{self._data.strftime('%d/%m/%y %H:%M')} - {self._descricao}"
