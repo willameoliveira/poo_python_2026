@@ -31,8 +31,9 @@ class Venda:
                 return True
         return False
 
-    def calcular_valor_total(self) -> float:
-        # self._valor_total = sum(item.valor for item in self._itens)
+    def calcular_valor_total(self):
+        # calculo total não é mais necessário aqui
+        #self._valor_total = sum(item.valor for item in self._itens)
         return self._valor_total
 
     def __str__(self):
