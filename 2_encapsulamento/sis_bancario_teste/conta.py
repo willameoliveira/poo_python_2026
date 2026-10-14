@@ -1,0 +1,59 @@
+from cliente import Cliente
+from movimentacao import Movimentacao
+
+class Conta:
+
+    def __init__(self, numero: int, cliente: Cliente, saldo:float=0):
+        self._numero = numero
+        self._saldo = saldo
+        self._cliente = cliente
+        self._movimentacoes: list[Movimentacao] = [Movimentacao(f"Abertura de conta com saldo inicial de R$ {saldo:.2f}")]
+
+    @property
+    def numero(self):
+        return self._numero
+    
+    @property
+    def cliente(self):
+        return self._cliente
+    
+    # O print fica por conta de quem chama o método. Isso torna nossa classe reusável para outros frontend (web, android, etc).
+    @property
+    def saldo(self):
+        return self._saldo
+
+    def _validar_saque(self, valor: float):
+        if valor > 0 and self.saldo >= valor:
+            return True
+        return False 
+
+    # As mensagens de erro irão aparecer aqui mais tarde com uso de tratamento de exceções
+    def sacar(self, valor: float) -> bool:
+        if self._validar_saque(valor): 
+            self._saldo -= valor
+            self._movimentacoes.append(Movimentacao(f"Saque de R$ {valor:.2f}"))
+            return True
+        return False
+
+    def depositar(self, valor: float) -> bool:
+        if valor > 0:
+            self._saldo += valor
+            self._movimentacoes.append(Movimentacao(f"Depósito de R$ {valor:.2f}"))
+            return True
+        return False
+
+    # usando referência antecipada para definir o tipo do parâmetro destino
+    def transferir(self, destino: "Conta", valor: float) -> bool:
+        if self._validar_saque(valor):
+            self._saldo -= valor
+            destino._saldo += valor
+            self._movimentacoes.append(Movimentacao(f"R$ {valor:.2f} transferidos para {destino}"))
+            destino._movimentacoes.append(Movimentacao(f"R$ {valor:.2f} recebidos de {self}"))
+            return True
+        return False
+
+    def __str__(self):
+        return f"{self._numero}: {self.cliente.nome}"
+
+    def obter_extrato(self) -> list[Movimentacao]:
+        return self._movimentacoes
